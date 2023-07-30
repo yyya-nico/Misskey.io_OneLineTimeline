@@ -1,0 +1,33 @@
+{
+    "theme_color": "#101010",
+    "background_color": "#1f1f1f",
+    "display": "standalone",
+    "start_url": "/misskey.io_one_line_tl/",
+    "name": "Misskey.io 1\u884c\u30bf\u30a4\u30e0\u30e9\u30a4\u30f3",
+    "short_name": "1\u884cTL",
+    "description": "1\u30ce\u30fc\u30c81\u884c\u3067Misskey.io\u306e\u65b0\u3057\u3044\u6295\u7a3f\u3092\u8868\u793a",
+    "dir": "ltr",
+    "lang": "ja-JP",
+    "icons": [
+        {
+            "src": "icon/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icon/icon-256x256.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        },
+        {
+            "src": "icon/icon-384x384.png",
+            "sizes": "384x384",
+            "type": "image/png"
+        },
+        {
+            "src": "icon/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

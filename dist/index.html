@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Misskey.io 1行タイムライン</title>
+    <link rel="icon" type="image/png" sizes="192x192" href="icon/icon-192x192.png">
+    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js"></script>
+    <script type="text/javascript" src="/js/pwacompat.min.js" async></script>
+    <script>
+        window.addEventListener('load', function () {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register("/js/serviceworker.js");
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="flex">
+        <div class="container notes">
+            <header class="h-notes">最新のノート</header>
+            <ul id="notes-list">
+            </ul>
+            <button id="note-latest">新しいノートを見る</button>
+        </div>
+        <div class="container renotes">
+            <header class="h-renotes">評判のノート</header>
+            <ul id="renotes-list">
+            </ul>
+            <button id="renote-latest">新しいノートを見る</button>
+        </div>
+    </div>
+</body>
+</html>

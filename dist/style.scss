@@ -1,0 +1,260 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --accent: rgb(233, 233, 233);
+    --scrollbarHandle: rgba(255, 255, 255, 0.2);
+    --scrollbarHandleHover: rgba(255, 255, 255, 0.4);
+}
+
+html,
+html * {
+    scrollbar-color: var(--scrollbarHandle) transparent;
+    scrollbar-width: thin
+}
+
+html::-webkit-scrollbar,
+html *::-webkit-scrollbar {
+    width: 6px;
+    height: 6px
+}
+
+html::-webkit-scrollbar-track,
+html *::-webkit-scrollbar-track {
+    background: inherit
+}
+
+html::-webkit-scrollbar-thumb,
+html *::-webkit-scrollbar-thumb {
+    background: var(--scrollbarHandle)
+}
+
+html::-webkit-scrollbar-thumb:hover,
+html *::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbarHandleHover)
+}
+
+html::-webkit-scrollbar-thumb:active,
+html *::-webkit-scrollbar-thumb:active {
+    background: var(--accent)
+}
+
+body {
+    position: relative;
+    margin: 0;
+    background-color: #1f1f1f;
+    color: #efefef;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 400;
+    scroll-behavior: smooth;
+}
+
+%notebox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 10px;
+}
+
+.flex {
+    display: flex;
+    height: 100vh;
+    height: 100dvh;
+
+    .container {
+        width: 50%;
+        height: 100%;
+        overflow-y: auto;
+
+        .h-notes,
+        .h-renotes {
+            position: sticky;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            width: 100%;
+            height: 56px;
+            padding: 15px 12.5px;
+            background: #0000007f;
+            font-size: 18px;
+            line-height: 26px;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+
+        #notes-list,
+        #renotes-list {
+            list-style: none;
+
+            >li {
+                animation: flash .2s linear;
+
+                .wrap {
+                    flex-grow: 1;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    word-break: break-all;
+                    text-overflow: ellipsis;
+
+                    &.is-open {
+                        white-space: normal;
+
+                        .text {
+                            br {
+                                display: inline;
+                            }
+                        }
+                    }
+
+                    >.name,
+                    >.text {
+                        .custom-emoji {
+                            height: 1.48em;
+                            vertical-align: -0.3em;
+                        }
+
+                        >.file-count {
+                            color: #aaaaaa;
+                        }
+                    }
+
+                    >.name {
+                        display: inline-block;
+                        overflow: hidden;
+                        max-width: 15em;
+                        color: #7f7f7f;
+                        white-space: nowrap;
+                        vertical-align: top;
+                        text-overflow: ellipsis;
+
+                        >.custom-emoji {
+                            filter: brightness(.5);
+                        }
+
+                        @media (max-width: 767px) {
+                            max-width: 7em;
+                        }
+                    }
+
+                    >.text {
+                        margin-left: 10px;
+
+                        .nothing {
+                            color: #7f7f7f;
+                        }
+
+                        .cwtext {
+                            color: #7f7f7f;
+
+                            >.custom-emoji {
+                                filter: brightness(.5);
+                            }
+                        }
+
+                        br {
+                            display: none;
+                        }
+                    }
+                }
+
+                .time {
+                    flex-shrink: 0;
+                    align-self: flex-end;
+                    color: #7f7f7f;
+                    text-decoration: none;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+
+                // + li {
+                //     border-top: 1px solid #7f7f7f;
+                // }
+            }
+        }
+
+        #notes-list {
+            >li {
+                @extend %notebox;
+            }
+        }
+
+        #renotes-list {
+            >li {
+
+                >.renote-info,
+                >.renoted-note {
+                    @extend %notebox;
+                }
+
+                >.renote-info {
+                    padding: 5px 10px 2px;
+
+                    >.wrap {
+                        >.name {
+                            color: #b4e900;
+
+                            >.custom-emoji {
+                                filter: opacity(.5) drop-shadow(0 0 0 #b4e900) brightness(1.25);
+                            }
+                        }
+                    }
+                }
+
+                >.renoted-note {
+                    padding: 2px 20px 5px;
+                }
+            }
+        }
+
+        [id$="-latest"] {
+            display: block;
+            visibility: hidden;
+            opacity: 0;
+            position: sticky;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: -40px;
+            padding: 10px;
+            border: 0;
+            border-radius: 20px;
+            background-color: #666666;
+            color: inherit;
+            transition: all .5s linear;
+        }
+
+        [id$="-latest"].show {
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+
+    @media (max-width: 1023px) {
+        overflow-x: auto;
+        ;
+
+        .container {
+            flex-shrink: 0;
+            width: 90%;
+        }
+    }
+}
+
+@keyframes flash {
+    from {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    to {
+        background-color: transparent;
+    }
+}

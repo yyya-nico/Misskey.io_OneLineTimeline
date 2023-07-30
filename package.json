@@ -1,0 +1,10 @@
+{
+  "devDependencies": {
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "mfm-js": "^0.23.3",
+    "misskey-js": "^0.0.16"
+  }
+}
