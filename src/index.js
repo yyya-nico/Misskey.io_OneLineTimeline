@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       ...(renote && {
         rnName:      renote.user.name ? await simpleMfmToHTML(renote.user.name, renote.host) : renote.user.username,
         planeRnName: renote.user.name ? renote.user.name : renote.user.username,
-        rnText:      await makeTextHTMLFromNote(renote),
+        rnText:      await makeTextHTMLFromNote(renote, renote.host),
         rnFileCount: renote.fileIds.length ? `<span class="file-count">[${renote.fileIds.length}つのファイル]</span>` : '', 
         rnTime: fromNow(new Date(renote.createdAt))
       })
