@@ -139,13 +139,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     // }
     const formatted = {
       name:      note.user.name ? await simpleMfmToHTML(note.user.name) : note.user.username,
-      planeName: note.user.name ? note.user.name : note.user.username,
+      plainName: note.user.name ? note.user.name : note.user.username,
       text:      await makeTextHTMLFromNote(note),
       fileCount: note.fileIds.length ? `<span class="file-count">[${note.fileIds.length}つのファイル]</span>` : '', 
       time:      new Date(note.createdAt).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit', second: '2-digit'}),
       ...(renote && {
         rnName:      renote.user.name ? await simpleMfmToHTML(renote.user.name, renote.host) : renote.user.username,
-        planeRnName: renote.user.name ? renote.user.name : renote.user.username,
+        plainRnName: renote.user.name ? renote.user.name : renote.user.username,
         rnText:      await makeTextHTMLFromNote(renote, renote.host),
         rnFileCount: renote.fileIds.length ? `<span class="file-count">[${renote.fileIds.length}つのファイル]</span>` : '', 
         rnTime: fromNow(new Date(renote.createdAt))
@@ -153,16 +153,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
     const html = !renote ? 
     `<li data-id="${note.id}">
-      <span class="wrap"><span class="name" title="${formatted.planeName}">${formatted.name}</span><span class="text">${formatted.text}${formatted.fileCount}</span></span><a href="${currentOrigin}/notes/${note.id}" class="time" target="_blank" rel=”noopener”>${formatted.time}</a>
+      <span class="wrap"><span class="name" title="${formatted.plainName}">${formatted.name}</span><span class="text">${formatted.text}${formatted.fileCount}</span></span><a href="${currentOrigin}/notes/${note.id}" class="time" target="_blank" rel=”noopener”>${formatted.time}</a>
     </li>
     `
     :
     `<li data-id="${note.id}">
       <div class="renote-info">
-        <span class="wrap"><span class="name" title="${formatted.planeName}">${formatted.name}</span><span class="text">${formatted.text}${formatted.fileCount}</span></span><a href="${currentOrigin}/notes/${note.id}" class="time" target="_blank" rel=”noopener”>${formatted.time}</a>
+        <span class="wrap"><span class="name" title="${formatted.plainName}">${formatted.name}</span><span class="text">${formatted.text}${formatted.fileCount}</span></span><a href="${currentOrigin}/notes/${note.id}" class="time" target="_blank" rel=”noopener”>${formatted.time}</a>
       </div>
       <div class="renoted-note">
-        <span class="wrap"><span class="name" title="${formatted.planeRnName}">${formatted.rnName}</span><span class="text">${formatted.rnText}${formatted.rnFileCount}</span></span><a href="${currentOrigin}/notes/${renote.id}" class="time" target="_blank" rel=”noopener”>${formatted.rnTime}</a>
+        <span class="wrap"><span class="name" title="${formatted.plainRnName}">${formatted.rnName}</span><span class="text">${formatted.rnText}${formatted.rnFileCount}</span></span><a href="${currentOrigin}/notes/${renote.id}" class="time" target="_blank" rel=”noopener”>${formatted.rnTime}</a>
       </div>
     </li>
     `;
